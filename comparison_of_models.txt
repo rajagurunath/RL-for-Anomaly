@@ -1,0 +1,79 @@
+
+
+take 30 devices 
+specify the time period
+
+manual compare alarm vs alerts 
+
+cross verify that with validation scripts 
+
+
+
+current Approach:
+
+
+Arima models(Stats model) to forecast the performance metrics (one model for each devices) , on top of the predicted metrics ,the Anomaly predicting 
+model such as KNN are used .
+
+We are planning to put this in a validation tool (Visualization tool) to understand the model predictions for the  users
+
+Arima models are Retrained for every 4 hours using cron jobs
+KNN models are Retrained for 
+
+cons:
+	if the False positive was increasing in particular time period ,then by using the USER's feedback ,ML engineer has to tune the model (hyperparamaters) 
+	Scalability takes a hit here ,since there was one Arima models for every device (to implement this for every device , storing ,tunning ,predicting the 
+	metrics using models becomes hectic)
+TL,DR:, Batch predictions, No Realtime Learning, Manual Tunning required whenever neccessary 
+	
+Other Possible Approach:(currently trying)
+
+Instead of involving humans (ML engineers) to tune the model whenever neccessary ,give the feedback from USER to the 
+model Directly, and model learns those pattern on the fly, this type modeling can be achieved with modeling techniques such as 
+Active learning ,Online learning (on the fly learning) and Reinforcement learning
+
+Explanation:
+	When the model predicted the alert wrongly (false positives) ,USER has to annotate that particular record\point as not anomaly in his validation tool
+	this type of feedback mechanisms helps the model to learn the SME knowledge directly without the help of tunning the Model 
+
+	Probably if it works out , then it can be done in Single model (for a node CH6y) instead of 240 arima models ,
+	
+	
+
+Reinforcement learning:
+	Here our model behaves as a Agent , this agent gets reward when the model correctly predicted the alarm ,and gets punishment when the model
+	predicted wrongly (false positive and false negative)
+	Currently i am working on this !!!!
+	
+	cons
+		Mathematical framing of reward and punishment signal from the data to the model was difficult
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
